@@ -29,11 +29,14 @@ public class CircleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_elapedTime = Time.deltaTime;
-
+        /*
+        m_elapedTime += Time.deltaTime;
         var amount = m_elapedTime % m_duration / m_duration;
         var scale = Mathf.Lerp(m_from, m_to, amount);
-
+        */
+        m_elapedTime += Time.deltaTime;
+        var amount = m_elapedTime % m_duration / m_duration;
+        var scale = Mathf.Lerp(m_from, m_to, amount);
         transform.localScale = new Vector3(scale, scale, 1);
     }
 

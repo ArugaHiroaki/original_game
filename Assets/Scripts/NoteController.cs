@@ -5,7 +5,7 @@ using UnityEngine;
 public class NoteController : MonoBehaviour
 {
 
-    float moveSpeed = 3.0f;
+    float moveSpeed = 2.0f;
     GameObject player;
 
     // Start is called before the first frame update
@@ -28,7 +28,14 @@ public class NoteController : MonoBehaviour
     {
         if(this.gameObject.tag == collision.gameObject.tag)
         {
-            player.SendMessage("AddScore");
+            if(this.gameObject.transform.position.x >= -0.5f)
+            {
+                player.SendMessage("AddScore", 200);
+            }
+            else
+            {
+                player.SendMessage("AddScore", 100);
+            }
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Friend")

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RestController : MonoBehaviour
 {
 
-    float moveSpeed = 3.0f;
+    float moveSpeed = 2.0f;
     GameObject player;
 
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class RestController : MonoBehaviour
         {
             if(this.gameObject.tag == "Friend")
             {
-                player.SendMessage("Recover");
+                player.SendMessage("AddScore", 100);
             }
             else
             {
