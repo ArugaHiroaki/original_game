@@ -15,6 +15,9 @@ public class CircleController : MonoBehaviour
 
     private float m_elapedTime;
 
+    public AudioClip drumSound;
+    AudioSource audioSource;
+
     private void Reset()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
@@ -24,6 +27,7 @@ public class CircleController : MonoBehaviour
     void Start()
     {
         InitLineRenderer();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +40,11 @@ public class CircleController : MonoBehaviour
         */
         m_elapedTime += Time.deltaTime;
         var amount = m_elapedTime % m_duration / m_duration;
+        if (amount >= 0.99f)
+        {
+            Debug.Log("Sound");
+            audioSource.PlayOneShot(drumSound);
+        }
         var scale = Mathf.Lerp(m_from, m_to, amount);
         transform.localScale = new Vector3(scale, scale, 1);
     }
