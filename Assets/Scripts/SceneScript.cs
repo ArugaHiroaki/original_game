@@ -23,8 +23,19 @@ public class SceneScript : MonoBehaviour
             {
                 SceneManager.LoadScene("GameOver");
             }
+            if(playerController.timer == 0)
+            {
+                SceneManager.LoadScene("GameClear");
+            }
         }
         if (SceneManager.GetActiveScene().name == "GameOver")
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Main");
+            }
+        }
+        if(SceneManager.GetActiveScene().name == "GameClear")
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {

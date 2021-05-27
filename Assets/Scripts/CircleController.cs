@@ -40,6 +40,7 @@ public class CircleController : MonoBehaviour
         */
         m_elapedTime += Time.deltaTime;
         var amount = m_elapedTime % m_duration / m_duration;
+        //Debug.Log(amount);
         if (amount >= 0.99f)
         {
             Debug.Log("Sound");

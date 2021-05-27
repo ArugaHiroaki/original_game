@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Slider slider;
     [SerializeField] Text playerHpText;
+    [SerializeField] Text timeText;
     PlayerController playerController;
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class UIController : MonoBehaviour
         float sliderValue = (float)playerController.playerHp / (float)playerController.maxPlayerHp;
         scoreText.text = "Score: " + playerController.score;
         playerHpText.text = "HP: " + playerController.playerHp;
+        timeText.text = "Time: " + playerController.timer.ToString("f1");
         slider.value = sliderValue;
     }
 }

@@ -12,78 +12,90 @@ public class PlayerController : MonoBehaviour
     public int maxPlayerHp = 10;　//最大HP
     int noteNum;　//音符の種類の番号
     bool isZone;　//射撃ゾーンにいるかどうか
+    bool isPlaying; //プレイ中かどうか
+    public float timer;
 
 
     // Start is called before the first frame update
     void Start()
     {
         noteNum = 0;
+        isPlaying = true;
+        timer = 60;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (this.gameObject.transform.position.x <= -5)
+        if(timer <= 0)
         {
-            isZone = true;
+            timer = 0;
+            isPlaying = false;
         }
-        else
+        if (isPlaying)
         {
-            isZone = false;
-        }
-
-        //右キーが押された時
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            if (this.transform.position.x <= 4)
+            timer -= Time.deltaTime;
+            if (this.gameObject.transform.position.x <= -5)
             {
-                this.transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                isZone = true;
             }
-        }
-
-        //左キーが押された時
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if(this.transform.position.x >= -6.1f)
+            else
             {
-                this.transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                isZone = false;
             }
-        }
 
-        if (isZone)
-        {
-
-            //上キーが押された時
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            //右キーが押された時
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                if (this.transform.position.y < 0.6f)
+                if (this.transform.position.x <= 4)
                 {
-                    this.transform.position += new Vector3(0, 0.4f, 0);
+                    this.transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
                 }
             }
 
-            //下キーが押された時
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            //左キーが押された時
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                if (this.transform.position.y >= -1.7f)
+                if (this.transform.position.x >= -6.1f)
                 {
-                    this.transform.position -= new Vector3(0, 0.4f, 0);
+                    this.transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (isZone)
             {
-                Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-            }
-        }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            noteNum++;
-            if(noteNum >= 2)
+                //上キーが押された時
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    if (this.transform.position.y < 0.6f)
+                    {
+                        this.transform.position += new Vector3(0, 0.4f, 0);
+                    }
+                }
+
+                //下キーが押された時
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    if (this.transform.position.y >= -1.7f)
+                    {
+                        this.transform.position -= new Vector3(0, 0.4f, 0);
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                noteNum = 0;
+                noteNum++;
+                if (noteNum >= 2)
+                {
+                    noteNum = 0;
+                }
             }
         }
     }
