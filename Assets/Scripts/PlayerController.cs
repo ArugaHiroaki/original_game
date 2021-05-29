@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     bool isPlaying; //プレイ中かどうか
     public float timer;
 
+    [SerializeField] GameObject timingCircle;
+    CircleController circleController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
         noteNum = 0;
         isPlaying = true;
         timer = 60;
+        circleController = timingCircle.GetComponent<CircleController>();
     }
 
     // Update is called once per frame
@@ -83,9 +87,12 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.95f)
                 {
-                    Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                    }
                 }
             }
 

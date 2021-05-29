@@ -5,7 +5,7 @@ using UnityEngine;
 public class RestController : MonoBehaviour
 {
 
-    float moveSpeed = 2.0f;
+    float moveSpeed = 1.5f;
     GameObject player;
 
     // Start is called before the first frame update

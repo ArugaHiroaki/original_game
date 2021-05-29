@@ -13,7 +13,7 @@ using System.Collections.Generic;
 /// Static access to currently playing music.
 /// Music.Play will set and change current instance.
 /// </summary>
-public static class Music
+public static class Music //: MonoBehaviour
 {
 	#region properties
 	

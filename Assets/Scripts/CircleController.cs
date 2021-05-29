@@ -14,6 +14,11 @@ public class CircleController : MonoBehaviour
     [SerializeField] private float m_to; //スケール演出の終了値
 
     private float m_elapedTime;
+    public float timeCounter;
+
+    int beatCount;
+    public int enemyCreateBeat;
+    [SerializeField] GameObject enemyCreater;
 
     public AudioClip drumSound;
     AudioSource audioSource;
@@ -28,6 +33,7 @@ public class CircleController : MonoBehaviour
     {
         InitLineRenderer();
         audioSource = GetComponent<AudioSource>();
+        timeCounter = 0.0f;
     }
 
     // Update is called once per frame
@@ -41,13 +47,26 @@ public class CircleController : MonoBehaviour
         m_elapedTime += Time.deltaTime;
         var amount = m_elapedTime % m_duration / m_duration;
         //Debug.Log(amount);
-        if (amount >= 0.99f)
+        /*if (amount >= 0.99f)
         {
             Debug.Log("Sound");
             audioSource.PlayOneShot(drumSound);
         }
+        */
         var scale = Mathf.Lerp(m_from, m_to, amount);
         transform.localScale = new Vector3(scale, scale, 1);
+        timeCounter += Time.deltaTime;
+        if(timeCounter >= m_duration)
+        {
+            audioSource.PlayOneShot(drumSound);
+            timeCounter -= m_duration;
+            beatCount++;
+            if(beatCount % enemyCreateBeat == 0)
+            {
+                beatCount = 0;
+                enemyCreater.SendMessage("CreateEnemy");
+            }
+        }
     }
 
     void InitLineRenderer()

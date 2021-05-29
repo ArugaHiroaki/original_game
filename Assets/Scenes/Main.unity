@@ -680,7 +680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529356725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 599705468}
@@ -764,7 +764,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575377425}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: -0.5, z: 0}
+  m_LocalPosition: {x: 4, y: -0.5, z: 1}
   m_LocalScale: {x: 0.1, y: 3.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1653188444}
@@ -1209,7 +1209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954587405}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: -0.5, z: 0}
+  m_LocalPosition: {x: -5, y: -0.5, z: 1}
   m_LocalScale: {x: 0.1, y: 3.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1653188444}
@@ -1318,6 +1318,9 @@ MonoBehaviour:
   m_duration: 1
   m_from: 1.5
   m_to: 0.75
+  timeCounter: 0
+  enemyCreateBeat: 4
+  enemyCreater: {fileID: 1334120054}
   drumSound: {fileID: 8300000, guid: 0f345b015a6e14e6d991fcd2ffa3e967, type: 3}
 --- !u!120 &981419033
 LineRenderer:
@@ -1338,7 +1341,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0e2615a192f6e48ff8755197b2dcb87a, type: 2}
+  - {fileID: 2100000, guid: 5ff06cebee5364449983e326d430dcbb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1804,7 +1807,7 @@ Transform:
   m_GameObject: {fileID: 1165114554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 703655307}
   m_RootOrder: 0
@@ -1886,7 +1889,7 @@ MonoBehaviour:
   - {fileID: 7013576412180489643, guid: f6bd60164b85646d0beb6713b0adc444, type: 3}
   - {fileID: 6838517585248563813, guid: 3cc9884e838824f90a4f2831e81ee296, type: 3}
   - {fileID: 7436371672846603800, guid: c5c13a54ae1204d1684a2b2dc5424d35, type: 3}
-  enemyNum: 3
+  textAsset: {fileID: 0}
 --- !u!4 &1334120056
 Transform:
   m_ObjectHideFlags: 0
@@ -2133,7 +2136,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6adb62571228f4867b272be28340c32f, type: 2}
+  - {fileID: 2100000, guid: 5a80faf4ef96f43a0ba27d0cbd533c9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2384,7 +2387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714872932}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.5, y: -0.5, z: 1}
   m_LocalScale: {x: 0.1, y: 3.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1653188444}
@@ -2487,6 +2490,10 @@ PrefabInstance:
       propertyPath: playerHp
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
+      propertyPath: timingCircle
+      value: 
+      objectReference: {fileID: 981419031}
     - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
       propertyPath: notes.Array.size
       value: 2

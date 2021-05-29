@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1992888023298362801
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 265611191, guid: 5bcf95b6a5d4b7a44a90dd43cd5b14ff, type: 3}
+  m_Name: Colorize
+  m_EditorClassIdentifier: 
+  brightness: 0
+  contrast: 1
+  colorizeBasis: 0
+  colors:
+    serializedVersion: 2
+    key0: {r: 0.023529414, g: 0, b: 0, a: 0}
+    key1: {r: 0.023529414, g: 0, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,11 +57,11 @@ MonoBehaviour:
   m_Name: TestTexture
   m_EditorClassIdentifier: 
   versionNumber: 1000
-  globalNodeId: 9
+  globalNodeId: 11
   nodes:
   - nodeId: 1
     process: {fileID: 1135323904191196003}
-    inputs: 070000000700000007000000070000000700000007000000
+    inputs: 0b0000000b0000000b0000000b0000000b0000000b000000
     finalNode: 1
   - nodeId: 7
     process: {fileID: 5545654856682165254}
@@ -27,14 +71,26 @@ MonoBehaviour:
     process: {fileID: 6670973709444994547}
     inputs: 
     finalNode: 0
+  - nodeId: 10
+    process: {fileID: -1992888023298362801}
+    inputs: 08000000
+    finalNode: 0
+  - nodeId: 11
+    process: {fileID: 2170128751957586252}
+    inputs: 08000000
+    finalNode: 0
   nodePositions:
   - nodeId: 1
     nodePos: {x: 3990, y: 11}
   - nodeId: 7
-    nodePos: {x: 3819, y: 161}
+    nodePos: {x: 3743, y: 141}
   - nodeId: 8
-    nodePos: {x: 3661, y: 174}
-  checksum: 464e165830e08d5fc86c8b1ef97b40b2
+    nodePos: {x: 3585, y: 132}
+  - nodeId: 10
+    nodePos: {x: 3745, y: -4}
+  - nodeId: 11
+    nodePos: {x: 3742, y: 279}
+  checksum: f821e80ed8f7a288115c466ddbce853f
 --- !u!114 &1135323904191196003
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,6 +105,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preview: 0
   normalStrength: 0.75
+--- !u!114 &2170128751957586252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 265611191, guid: 5bcf95b6a5d4b7a44a90dd43cd5b14ff, type: 3}
+  m_Name: Colorize
+  m_EditorClassIdentifier: 
+  brightness: 0
+  contrast: 1
+  colorizeBasis: 0
+  colors:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 0}
+    key1: {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!114 &5545654856682165254
 MonoBehaviour:
   m_ObjectHideFlags: 1
