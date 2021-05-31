@@ -23,10 +23,10 @@ public class SceneScript : MonoBehaviour
             {
                 SceneManager.LoadScene("GameOver");
             }
-            if(playerController.timer == 0)
+            /*if(playerController.timer == 0)
             {
                 SceneManager.LoadScene("GameClear");
-            }
+            }*/
         }
         if (SceneManager.GetActiveScene().name == "GameOver")
         {
@@ -42,5 +42,10 @@ public class SceneScript : MonoBehaviour
                 SceneManager.LoadScene("Main");
             }
         }
+    }
+
+    void LoadClear()
+    {
+        SceneManager.LoadScene("GameClear");
     }
 }

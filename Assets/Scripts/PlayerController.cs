@@ -12,11 +12,14 @@ public class PlayerController : MonoBehaviour
     public int maxPlayerHp = 10;　//最大HP
     int noteNum;　//音符の種類の番号
     bool isZone;　//射撃ゾーンにいるかどうか
-    bool isPlaying; //プレイ中かどうか
+    public bool isPlaying; //プレイ中かどうか
     public float timer;
+    bool canShot;
 
     [SerializeField] GameObject timingCircle;
     CircleController circleController;
+    [SerializeField] GameObject sceneManager;
+    SceneScript sceneScript;
 
 
     // Start is called before the first frame update
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour
         isPlaying = true;
         timer = 60;
         circleController = timingCircle.GetComponent<CircleController>();
+        sceneScript = sceneManager.GetComponent<SceneScript>();
+        canShot = true;
     }
 
     // Update is called once per frame
@@ -91,7 +96,12 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                        if (canShot)
+                        {
+                            Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                            canShot = false;
+                            Invoke("Reload", 0.5f);
+                        }
                     }
                 }
             }
@@ -104,6 +114,46 @@ public class PlayerController : MonoBehaviour
                     noteNum = 0;
                 }
             }
+        }
+        else
+        {
+            if (this.transform.position.x < 4.5f)
+            {
+                GameObject[] eighth;
+                GameObject[] quarter;
+                eighth = GameObject.FindGameObjectsWithTag("Eighth");
+                quarter = GameObject.FindGameObjectsWithTag("Quarter");
+                foreach(GameObject note in eighth)
+                {
+                    Destroy(note.gameObject);
+                }
+                foreach(GameObject note in quarter)
+                {
+                    Destroy(note.gameObject);
+                }
+            }
+
+            if(this.transform.position.x < 9)
+            {
+                this.transform.position += new Vector3(1.5f * moveSpeed, 0, 0) * Time.deltaTime;
+            }
+            else
+            {
+                sceneManager.SendMessage("LoadClear");
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Friend")
+        {
+
+        }
+        else
+        {
+            Damage();
+            Destroy(collision.gameObject);
         }
     }
 
@@ -127,5 +177,10 @@ public class PlayerController : MonoBehaviour
         {
             playerHp++;
         }
+    }
+
+    void Reload()
+    {
+        canShot = true;
     }
 }

@@ -23,6 +23,9 @@ public class CircleController : MonoBehaviour
     public AudioClip drumSound;
     AudioSource audioSource;
 
+    [SerializeField] GameObject player;
+    PlayerController playerController;
+
     private void Reset()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
@@ -33,6 +36,7 @@ public class CircleController : MonoBehaviour
     {
         InitLineRenderer();
         audioSource = GetComponent<AudioSource>();
+        playerController = player.GetComponent<PlayerController>();
         timeCounter = 0.0f;
     }
 
@@ -53,18 +57,21 @@ public class CircleController : MonoBehaviour
             audioSource.PlayOneShot(drumSound);
         }
         */
-        var scale = Mathf.Lerp(m_from, m_to, amount);
-        transform.localScale = new Vector3(scale, scale, 1);
-        timeCounter += Time.deltaTime;
-        if(timeCounter >= m_duration)
+        if (playerController.isPlaying)
         {
-            audioSource.PlayOneShot(drumSound);
-            timeCounter -= m_duration;
-            beatCount++;
-            if(beatCount % enemyCreateBeat == 0)
+            var scale = Mathf.Lerp(m_from, m_to, amount);
+            transform.localScale = new Vector3(scale, scale, 1);
+            timeCounter += Time.deltaTime;
+            if (timeCounter >= m_duration)
             {
-                beatCount = 0;
-                enemyCreater.SendMessage("CreateEnemy");
+                audioSource.PlayOneShot(drumSound);
+                timeCounter -= m_duration;
+                beatCount++;
+                if (beatCount % enemyCreateBeat == 0)
+                {
+                    beatCount = 0;
+                    enemyCreater.SendMessage("CreateEnemy");
+                }
             }
         }
     }
