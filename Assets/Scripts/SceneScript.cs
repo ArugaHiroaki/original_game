@@ -42,6 +42,13 @@ public class SceneScript : MonoBehaviour
                 SceneManager.LoadScene("Main");
             }
         }
+        if(SceneManager.GetActiveScene().name == "Title")
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Main");
+            }
+        }
     }
 
     void LoadClear()

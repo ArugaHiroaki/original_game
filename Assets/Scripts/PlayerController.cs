@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.DeleteKey("SCORE");
         noteNum = 0;
         isPlaying = true;
         timer = 60;
@@ -119,6 +120,8 @@ public class PlayerController : MonoBehaviour
         {
             if (this.transform.position.x < 4.5f)
             {
+                PlayerPrefs.SetInt("SCORE", score);
+                PlayerPrefs.Save();
                 GameObject[] eighth;
                 GameObject[] quarter;
                 eighth = GameObject.FindGameObjectsWithTag("Eighth");

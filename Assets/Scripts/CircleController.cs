@@ -69,7 +69,8 @@ public class CircleController : MonoBehaviour
                 beatCount++;
                 if (beatCount % enemyCreateBeat == 0)
                 {
-                    beatCount = 0;
+                    //beatCount = 0;
+
                     enemyCreater.SendMessage("CreateEnemy");
                 }
             }
