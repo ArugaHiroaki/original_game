@@ -1921,7 +1921,7 @@ MonoBehaviour:
   - {fileID: 7013576412180489643, guid: f6bd60164b85646d0beb6713b0adc444, type: 3}
   - {fileID: 6838517585248563813, guid: 3cc9884e838824f90a4f2831e81ee296, type: 3}
   - {fileID: 7436371672846603800, guid: c5c13a54ae1204d1684a2b2dc5424d35, type: 3}
-  textAsset: {fileID: 0}
+  player: {fileID: 275885280}
 --- !u!4 &1334120056
 Transform:
   m_ObjectHideFlags: 0

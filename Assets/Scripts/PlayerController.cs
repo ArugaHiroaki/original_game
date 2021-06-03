@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     bool canShot;
     int currentPlayerPosNum;
     float[] playerPos_y = new float[7] { -1.725f, -1.325f, -0.925f, -0.525f, -0.125f, 0.275f, 0.625f } ;
-    //private int playerLevel;
+    private int playerLevel;
 
     [SerializeField] GameObject timingCircle;
     CircleController circleController;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         canShot = true;
-        //playerLevel = 1;
+        playerLevel = 2;
         currentPlayerPosNum = 3;
     }
 
@@ -111,7 +111,11 @@ public class PlayerController : MonoBehaviour
                     {
                         if (canShot)
                         {
-                            Shot();
+                            Shot(currentPlayerPosNum);
+                            /*if (playerLevel >= 2 && currentPlayerPosNum <= 3)
+                            {
+                                Shot(currentPlayerPosNum + 3);
+                            }*/
                         }
                     }
                 }
@@ -162,13 +166,20 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Friend")
         {
-
+            if(collision.gameObject.transform.position.x > -0.5f)
+            {
+                AddScore(200);
+                playerLevel++;
+            } else
+            {
+                AddScore(100);
+            }
         }
         else
         {
             Damage();
-            Destroy(collision.gameObject);
         }
+        Destroy(collision.gameObject);
     }
 
     void AddScore(int addScore)
@@ -193,10 +204,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Shot()
+    void Shot(int posNum)
     {
         Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-        audioSource.PlayOneShot(noteSound[currentPlayerPosNum]);
+        audioSource.PlayOneShot(noteSound[posNum]);
         canShot = false;
         Invoke("Reload", 0.5f);
     }

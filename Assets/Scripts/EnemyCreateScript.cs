@@ -9,9 +9,10 @@ public class EnemyCreateScript : MonoBehaviour
     //float timeCounter;
     int enemyNum;
     float[] createPosition_y = new float[7];
+    int enemyCount = 0;
 
-
-    public TextAsset textAsset;
+    [SerializeField] GameObject player;
+    PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class EnemyCreateScript : MonoBehaviour
         {
             createPosition_y[i] = -1.725f + 0.4f * i;
         }
+        playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -44,12 +46,15 @@ public class EnemyCreateScript : MonoBehaviour
         int enemykind = Random.Range(0, enemyNum - 1);
         int position = Random.Range(0, 7);
         Instantiate(enemies[enemykind], new Vector3(this.transform.position.x, createPosition_y[position], this.transform.position.z), Quaternion.identity);
+        enemyCount++;
+        if(enemyCount % 5 == 0)
+        {
+            int posGood = Random.Range(0, 7);
+            while(posGood == position)
+            {
+                posGood = Random.Range(0, 7);
+            }
+            Instantiate(enemies[enemyNum - 1], new Vector3(this.transform.position.x, createPosition_y[posGood], this.transform.position.z), Quaternion.identity);
+        }
     }
-
-    /*void LoadChart()
-    {
-        string jsonText = textAsset.ToString();
-        JsonNode json = JsonNode.Parse(jsonText);
-    }
-    */
 }
