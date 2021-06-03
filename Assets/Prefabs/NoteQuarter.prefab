@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 7808983800704101515}
   - component: {fileID: 3548208910138502570}
   m_Layer: 0
-  m_Name: Square
+  m_Name: QuarterTexture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,8 +170,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8838965286644224488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 1.96, z: 0}
-  m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
+  m_LocalPosition: {x: 0.1, y: 2.15, z: 0}
+  m_LocalScale: {x: 1.75, y: 1.8, z: 1.65}
   m_Children: []
   m_Father: {fileID: 8022672182728513174}
   m_RootOrder: 0

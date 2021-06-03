@@ -8,7 +8,7 @@ public class EnemyCreateScript : MonoBehaviour
     public GameObject[] enemies;
     //float timeCounter;
     int enemyNum;
-    float[] createPosition_y = new float[7];
+    float[] createPosition_y = new float[7] { -1.7f, -1.3f, -0.9f, -0.55f, -0.15f, 0.2f, 0.6f };
     int enemyCount = 0;
 
     [SerializeField] GameObject player;
@@ -19,10 +19,10 @@ public class EnemyCreateScript : MonoBehaviour
     {
         enemyNum = enemies.Length;
         //timeCounter = 0.0f;
-        for(int i = 0; i < 7; i++)
+        /*for(int i = 0; i < 7; i++)
         {
             createPosition_y[i] = -1.725f + 0.4f * i;
-        }
+        }*/
         playerController = player.GetComponent<PlayerController>();
     }
 

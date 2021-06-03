@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public float timer;
     bool canShot;
     int currentPlayerPosNum;
-    float[] playerPos_y = new float[7] { -1.725f, -1.325f, -0.925f, -0.525f, -0.125f, 0.275f, 0.625f } ;
+    float[] playerPos_y = new float[7] { -1.7f, -1.3f, -0.9f, -0.55f, -0.15f, 0.2f, 0.6f } ;
     private int playerLevel;
 
     [SerializeField] GameObject timingCircle;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         canShot = true;
-        playerLevel = 2;
+        playerLevel = 1;
         currentPlayerPosNum = 3;
     }
 
@@ -112,10 +112,14 @@ public class PlayerController : MonoBehaviour
                         if (canShot)
                         {
                             Shot(currentPlayerPosNum);
-                            /*if (playerLevel >= 2 && currentPlayerPosNum <= 3)
+                            if (playerLevel >= 2 && currentPlayerPosNum <= 4)
                             {
-                                Shot(currentPlayerPosNum + 3);
-                            }*/
+                                Shot(currentPlayerPosNum + 2);
+                            }
+                            if (playerLevel >= 3 && currentPlayerPosNum >= 2)
+                            {
+                                Shot(currentPlayerPosNum - 2);
+                            }
                         }
                     }
                 }
@@ -206,7 +210,7 @@ public class PlayerController : MonoBehaviour
 
     void Shot(int posNum)
     {
-        Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        Instantiate(notes[noteNum], new Vector2(this.transform.position.x + 1, playerPos_y[posNum]), Quaternion.identity);
         audioSource.PlayOneShot(noteSound[posNum]);
         canShot = false;
         Invoke("Reload", 0.5f);
