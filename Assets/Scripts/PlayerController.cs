@@ -15,11 +15,17 @@ public class PlayerController : MonoBehaviour
     public bool isPlaying; //プレイ中かどうか
     public float timer;
     bool canShot;
+    int currentPlayerPosNum;
+    float[] playerPos_y = new float[7] { -1.725f, -1.325f, -0.925f, -0.525f, -0.125f, 0.275f, 0.625f } ;
+    //private int playerLevel;
 
     [SerializeField] GameObject timingCircle;
     CircleController circleController;
     [SerializeField] GameObject sceneManager;
     SceneScript sceneScript;
+
+    public AudioClip[] noteSound;
+    AudioSource audioSource;
 
 
     // Start is called before the first frame update
@@ -31,7 +37,10 @@ public class PlayerController : MonoBehaviour
         timer = 60;
         circleController = timingCircle.GetComponent<CircleController>();
         sceneScript = sceneManager.GetComponent<SceneScript>();
+        audioSource = this.gameObject.GetComponent<AudioSource>();
         canShot = true;
+        //playerLevel = 1;
+        currentPlayerPosNum = 3;
     }
 
     // Update is called once per frame
@@ -78,35 +87,37 @@ public class PlayerController : MonoBehaviour
                 //上キーが押された時
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (this.transform.position.y < 0.6f)
+                    if (currentPlayerPosNum <= 5)
                     {
-                        this.transform.position += new Vector3(0, 0.4f, 0);
+                        currentPlayerPosNum++;
+                        this.transform.position = new Vector2(this.transform.position.x, playerPos_y[currentPlayerPosNum]);
                     }
                 }
 
                 //下キーが押された時
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (this.transform.position.y >= -1.7f)
+                    if (currentPlayerPosNum >= 1)
                     {
-                        this.transform.position -= new Vector3(0, 0.4f, 0);
+                        currentPlayerPosNum--;
+                        this.transform.position = new Vector2(this.transform.position.x, playerPos_y[currentPlayerPosNum]);
                     }
                 }
 
+                //音符の発射
                 if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.95f)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         if (canShot)
                         {
-                            Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-                            canShot = false;
-                            Invoke("Reload", 0.5f);
+                            Shot();
                         }
                     }
                 }
             }
 
+            //音符の切り替え
             if (Input.GetKeyDown(KeyCode.C))
             {
                 noteNum++;
@@ -136,7 +147,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if(this.transform.position.x < 9)
+            if(this.transform.position.x <= 10)
             {
                 this.transform.position += new Vector3(1.5f * moveSpeed, 0, 0) * Time.deltaTime;
             }
@@ -180,6 +191,14 @@ public class PlayerController : MonoBehaviour
         {
             playerHp++;
         }
+    }
+
+    void Shot()
+    {
+        Instantiate(notes[noteNum], this.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        audioSource.PlayOneShot(noteSound[currentPlayerPosNum]);
+        canShot = false;
+        Invoke("Reload", 0.5f);
     }
 
     void Reload()
