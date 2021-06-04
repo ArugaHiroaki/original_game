@@ -12,6 +12,10 @@ public class RestController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if(this.gameObject.tag == "Friend")
+        {
+            moveSpeed = 1.25f;
+        }
     }
 
     // Update is called once per frame

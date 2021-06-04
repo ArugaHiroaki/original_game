@@ -108,6 +108,7 @@ MonoBehaviour:
   timer: 60
   timingCircle: {fileID: 0}
   sceneManager: {fileID: 0}
+  endLine: {fileID: 0}
   noteSound:
   - {fileID: 8300000, guid: 6912a564f73a644b5979c8c5d8918b4d, type: 3}
   - {fileID: 8300000, guid: 1b369016f5dcb41bca835d2413c992a3, type: 3}

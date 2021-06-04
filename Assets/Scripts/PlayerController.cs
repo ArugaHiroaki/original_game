@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    float moveSpeed = 2.5f;　//左右の動きの速さ
+    float moveSpeed = 2f;　//左右の動きの速さ
     [SerializeField] GameObject[] notes;　//音符格納配列
     public int score;　//スコア
     public int playerHp = 10;　//現在のHP
@@ -24,8 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject sceneManager;
     SceneScript sceneScript;
 
+    [SerializeField] GameObject endLine;
+
     public AudioClip[] noteSound;
     AudioSource audioSource;
+
+    public float bpm;
 
 
     // Start is called before the first frame update
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
+        //score = 0;
     }
 
     // Update is called once per frame
@@ -120,6 +125,7 @@ public class PlayerController : MonoBehaviour
                             {
                                 Shot(currentPlayerPosNum - 2);
                             }
+                            Invoke("Reload", 30 / bpm);
                         }
                     }
                 }
@@ -137,19 +143,24 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            endLine.SetActive(false);
             if (this.transform.position.x < 4.5f)
             {
                 PlayerPrefs.SetInt("SCORE", score);
                 PlayerPrefs.Save();
-                GameObject[] eighth;
-                GameObject[] quarter;
-                eighth = GameObject.FindGameObjectsWithTag("Eighth");
-                quarter = GameObject.FindGameObjectsWithTag("Quarter");
-                foreach(GameObject note in eighth)
+                GameObject[] leftObjects;
+                leftObjects = GameObject.FindGameObjectsWithTag("Eighth");
+                foreach(GameObject note in leftObjects)
                 {
                     Destroy(note.gameObject);
                 }
-                foreach(GameObject note in quarter)
+                leftObjects = GameObject.FindGameObjectsWithTag("Quarter");
+                foreach (GameObject note in leftObjects)
+                {
+                    Destroy(note.gameObject);
+                }
+                leftObjects = GameObject.FindGameObjectsWithTag("Friend");
+                foreach (GameObject note in leftObjects)
                 {
                     Destroy(note.gameObject);
                 }
@@ -161,7 +172,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                sceneManager.SendMessage("LoadClear");
+                //sceneManager.SendMessage("LoadClear");
+                sceneScript.LoadClear();
             }
         }
     }
@@ -186,12 +198,12 @@ public class PlayerController : MonoBehaviour
         Destroy(collision.gameObject);
     }
 
-    void AddScore(int addScore)
+    public void AddScore(int addScore)
     {
         score += addScore;
     }
 
-    void Damage()
+    public void Damage()
     {
         playerHp--;
         if (score >= 100)
@@ -213,7 +225,6 @@ public class PlayerController : MonoBehaviour
         Instantiate(notes[noteNum], new Vector2(this.transform.position.x + 1, playerPos_y[posNum]), Quaternion.identity);
         audioSource.PlayOneShot(noteSound[posNum]);
         canShot = false;
-        Invoke("Reload", 0.5f);
     }
 
     void Reload()

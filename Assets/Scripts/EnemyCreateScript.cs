@@ -41,7 +41,7 @@ public class EnemyCreateScript : MonoBehaviour
         */
     }
 
-    void CreateEnemy()
+    public void CreateEnemy()
     {
         int enemykind = Random.Range(0, enemyNum - 1);
         int position = Random.Range(0, 7);

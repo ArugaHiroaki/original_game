@@ -51,7 +51,7 @@ public class SceneScript : MonoBehaviour
         }
     }
 
-    void LoadClear()
+    public void LoadClear()
     {
         SceneManager.LoadScene("GameClear");
     }

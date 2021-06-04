@@ -9,7 +9,7 @@ public class CircleController : MonoBehaviour
     [SerializeField] private float m_radius; //円の半径
     [SerializeField] private float m_lineWidth; //円の線の太さ
 
-    [SerializeField] private float m_duration; //スケール演出の再生時間
+    private float m_duration; //スケール演出の再生時間
     [SerializeField] private float m_from; //スケール演出の開始値
     [SerializeField] private float m_to; //スケール演出の終了値
 
@@ -26,6 +26,8 @@ public class CircleController : MonoBehaviour
     [SerializeField] GameObject player;
     PlayerController playerController;
 
+    [SerializeField] float bpm;
+
     private void Reset()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
@@ -38,6 +40,7 @@ public class CircleController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerController = player.GetComponent<PlayerController>();
         timeCounter = 0.0f;
+        m_duration = 60 / bpm;
     }
 
     // Update is called once per frame
@@ -71,7 +74,8 @@ public class CircleController : MonoBehaviour
                 {
                     //beatCount = 0;
 
-                    enemyCreater.SendMessage("CreateEnemy");
+                    //enemyCreater.SendMessage("CreateEnemy");
+                    enemyCreater.GetComponent<EnemyCreateScript>().CreateEnemy();
                 }
             }
         }
