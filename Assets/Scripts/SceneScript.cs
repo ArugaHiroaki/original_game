@@ -44,15 +44,16 @@ public class SceneScript : MonoBehaviour
         }
         if(currentSceneName == "GameClear")
         {
-            if(clearStageNum < lastStageNum)
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (clearStageNum < lastStageNum)
                 {
                     //SceneManager.LoadScene("Stage2");
                     PlayerPrefs.SetInt("ClearStage", clearStageNum + 1);
                     PlayerPrefs.Save();
-                    SceneManager.LoadScene("Main");
                 }
+                SceneManager.LoadScene("Main");
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
