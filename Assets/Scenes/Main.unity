@@ -440,7 +440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee3b006febc9463e9ee0720c062a200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backGroundMusic: {fileID: 8300000, guid: 50e2b33b5b88b4903b7fab584a80a07f, type: 3}
+  backGroundMusic:
+  - {fileID: 8300000, guid: 50e2b33b5b88b4903b7fab584a80a07f, type: 3}
+  - {fileID: 8300000, guid: 4fcbfe1f5b0d44eaead5955567f8f552, type: 3}
   player: {fileID: 275885280}
 --- !u!1 &408465548
 GameObject:

@@ -5,18 +5,20 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
 
-    [SerializeField] AudioClip backGroundMusic;
+    [SerializeField] AudioClip[] backGroundMusic;
     AudioSource audioSource;
 
     [SerializeField] GameObject player;
     PlayerController playerController;
+    int currentStageNum;
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
         playerController = player.GetComponent<PlayerController>();
-        audioSource.PlayOneShot(backGroundMusic);
+        currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
+        audioSource.PlayOneShot(backGroundMusic[currentStageNum]);
     }
 
     // Update is called once per frame

@@ -56,6 +56,11 @@ public class SceneScript : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                if (clearStageNum < lastStageNum)
+                {
+                    PlayerPrefs.SetInt("ClearStage", clearStageNum + 1);
+                    PlayerPrefs.Save();
+                }
                 SceneManager.LoadScene("Title");
             }
         }
@@ -64,6 +69,10 @@ public class SceneScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 PlayerPrefs.DeleteKey("ClearStage");
+                SceneManager.LoadScene("Main");
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 SceneManager.LoadScene("Main");
             }
         }
