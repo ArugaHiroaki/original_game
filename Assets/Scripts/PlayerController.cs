@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public float timer;
     bool canShot;
     int currentPlayerPosNum;
-    float[] playerPos_y = new float[7] { -1.7f, -1.3f, -0.9f, -0.55f, -0.15f, 0.2f, 0.6f } ;
+    float[] playerPos_y = new float[7] { -1.7f, -1.3f, -0.9f, -0.55f, -0.15f, 0.2f, 0.6f };
     private int playerLevel;
 
     [SerializeField] GameObject timingCircle;
@@ -29,19 +29,21 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] noteSound;
     AudioSource audioSource;
 
-    public float bpm;
-
+    int currentStageNum;
+    float[] bpm = new float[2] { 60, 90 };
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerPrefs.DeleteKey("SCORE");
-        noteNum = 0;
-        isPlaying = true;
-        timer = 60;
+        //PlayerPrefs.DeleteKey("ClearStage");
+        currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         circleController = timingCircle.GetComponent<CircleController>();
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
+        noteNum = 0;
+        isPlaying = true;
+        timer = 10;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
                             {
                                 Shot(currentPlayerPosNum - 2);
                             }
-                            Invoke("Reload", 30 / bpm);
+                            Invoke("Reload", 30 / bpm[currentStageNum]);
                         }
                     }
                 }
@@ -147,6 +149,7 @@ public class PlayerController : MonoBehaviour
             if (this.transform.position.x < 4.5f)
             {
                 PlayerPrefs.SetInt("SCORE", score);
+                PlayerPrefs.SetInt("ClearStage", currentStageNum);
                 PlayerPrefs.Save();
                 GameObject[] leftObjects;
                 leftObjects = GameObject.FindGameObjectsWithTag("Eighth");

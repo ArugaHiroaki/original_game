@@ -8,44 +8,62 @@ public class SceneScript : MonoBehaviour
     [SerializeField] GameObject player;
     PlayerController playerController;
 
+    string currentSceneName;
+
+    int clearStageNum;
+    int lastStageNum = 1;
+
     // Start is called before the first frame update
     void Start()
     {
         playerController = player.GetComponent<PlayerController>();
+        currentSceneName = SceneManager.GetActiveScene().name;
+        clearStageNum = PlayerPrefs.GetInt("ClearStage", 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Main")
+        if(currentSceneName == "Main")
         {
             if(playerController.playerHp <= 0)
             {
                 SceneManager.LoadScene("GameOver");
             }
-            /*if(playerController.timer == 0)
-            {
-                SceneManager.LoadScene("GameClear");
-            }*/
         }
-        if (SceneManager.GetActiveScene().name == "GameOver")
+        if (currentSceneName == "GameOver")
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene("Main");
             }
-        }
-        if(SceneManager.GetActiveScene().name == "GameClear")
-        {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                SceneManager.LoadScene("Main");
+                SceneManager.LoadScene("Title");
             }
         }
-        if(SceneManager.GetActiveScene().name == "Title")
+        if(currentSceneName == "GameClear")
+        {
+            if(clearStageNum < lastStageNum)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    //SceneManager.LoadScene("Stage2");
+                    PlayerPrefs.SetInt("ClearStage", clearStageNum + 1);
+                    PlayerPrefs.Save();
+                    SceneManager.LoadScene("Main");
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Title");
+            }
+        }
+        if(currentSceneName == "Title")
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                PlayerPrefs.DeleteKey("ClearStage");
                 SceneManager.LoadScene("Main");
             }
         }

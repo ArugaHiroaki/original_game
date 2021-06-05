@@ -1354,7 +1354,6 @@ MonoBehaviour:
   enemyCreater: {fileID: 1334120054}
   drumSound: {fileID: 8300000, guid: 0f345b015a6e14e6d991fcd2ffa3e967, type: 3}
   player: {fileID: 275885280}
-  bpm: 60
 --- !u!120 &981419033
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2412,6 +2411,7 @@ MonoBehaviour:
   slider: {fileID: 1051566302}
   playerHpText: {fileID: 776800049}
   timeText: {fileID: 100847480}
+  stageText: {fileID: 408465550}
 --- !u!4 &1666840021
 Transform:
   m_ObjectHideFlags: 0

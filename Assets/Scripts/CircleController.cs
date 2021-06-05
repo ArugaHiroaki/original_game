@@ -26,7 +26,8 @@ public class CircleController : MonoBehaviour
     [SerializeField] GameObject player;
     PlayerController playerController;
 
-    [SerializeField] float bpm;
+    float[] bpm = new float[2] { 60, 90 };
+    int currentStageNum;
 
     private void Reset()
     {
@@ -39,8 +40,9 @@ public class CircleController : MonoBehaviour
         InitLineRenderer();
         audioSource = GetComponent<AudioSource>();
         playerController = player.GetComponent<PlayerController>();
+        currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         timeCounter = 0.0f;
-        m_duration = 60 / bpm;
+        m_duration = 60 / bpm[currentStageNum];
     }
 
     // Update is called once per frame

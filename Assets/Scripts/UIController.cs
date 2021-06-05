@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] Text playerHpText;
     [SerializeField] Text timeText;
+    [SerializeField] Text stageText;
     PlayerController playerController;
 
     // Start is called before the first frame update
@@ -18,6 +19,7 @@ public class UIController : MonoBehaviour
     {
         playerController = player.GetComponent<PlayerController>();
         slider.value = 1;
+        stageText.text = "Stage" + (PlayerPrefs.GetInt("ClearStage", 0) + 1);
     }
 
     // Update is called once per frame
