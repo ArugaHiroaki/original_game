@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     int currentStageNum;
-    float[] bpm = new float[2] { 60, 90 };
+    float[] bpm = new float[5] { 60, 70, 80, 90, 100 };
 
     // Start is called before the first frame update
     void Start()

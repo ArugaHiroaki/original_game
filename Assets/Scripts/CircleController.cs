@@ -26,7 +26,7 @@ public class CircleController : MonoBehaviour
     [SerializeField] GameObject player;
     PlayerController playerController;
 
-    float[] bpm = new float[2] { 60, 90 };
+    float[] bpm = new float[5] { 60, 70, 80, 90, 100 };
     int currentStageNum;
 
     private void Reset()

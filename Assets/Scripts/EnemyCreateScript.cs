@@ -14,6 +14,8 @@ public class EnemyCreateScript : MonoBehaviour
     [SerializeField] GameObject player;
     PlayerController playerController;
 
+    int currentStageNum;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class EnemyCreateScript : MonoBehaviour
             createPosition_y[i] = -1.725f + 0.4f * i;
         }*/
         playerController = player.GetComponent<PlayerController>();
+        currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
     }
 
     // Update is called once per frame
@@ -43,7 +46,9 @@ public class EnemyCreateScript : MonoBehaviour
 
     public void CreateEnemy()
     {
-        int enemykind = Random.Range(0, enemyNum - 1);
+        int enemyRange = 1;
+        if(currentStageNum >= 2) { enemyRange = 2; }
+        int enemykind = Random.Range(0, enemyRange);
         int position = Random.Range(0, 7);
         Instantiate(enemies[enemykind], new Vector3(this.transform.position.x, createPosition_y[position], this.transform.position.z), Quaternion.identity);
         enemyCount++;
