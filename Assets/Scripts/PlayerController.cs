@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] noteSound;
     AudioSource audioSource;
 
+    private Animator animator;
+
     int currentStageNum;
     float[] bpm = new float[2] { 60, 90 };
 
@@ -43,23 +45,25 @@ public class PlayerController : MonoBehaviour
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
         isPlaying = true;
-        timer = 10;
+        timer = 20;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
+        animator = this.GetComponent<Animator>();
         //score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer <= 0)
+        if (timer <= 0)
         {
             timer = 0;
             isPlaying = false;
         }
         if (isPlaying)
         {
+            animator.SetFloat("Horizontal", 0);
             timer -= Time.deltaTime;
             if (this.gameObject.transform.position.x <= -5)
             {
@@ -76,6 +80,8 @@ public class PlayerController : MonoBehaviour
                 if (this.transform.position.x <= 4)
                 {
                     this.transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                    animator.SetFloat("Horizontal", 1.0f);
+                    this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
                 }
             }
 
@@ -85,6 +91,8 @@ public class PlayerController : MonoBehaviour
                 if (this.transform.position.x >= -6.1f)
                 {
                     this.transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                    animator.SetFloat("Horizontal", -1.0f);
+                    this.transform.localScale = new Vector3(-0.75f, 0.75f, 0.75f);
                 }
             }
 
@@ -116,6 +124,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
+                        this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
                         if (canShot)
                         {
                             Shot(currentPlayerPosNum);
@@ -145,7 +154,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             endLine.SetActive(false);
+            animator.SetFloat("Horizontal", 1.0f);
             if (this.transform.position.x < 4.5f)
             {
                 PlayerPrefs.SetInt("SCORE", score);
