@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C))
             {
                 noteNum++;
-                if (noteNum >= 2)
+                if (noteNum >= 3)
                 {
                     noteNum = 0;
                 }
