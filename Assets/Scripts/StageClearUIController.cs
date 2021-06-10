@@ -10,7 +10,7 @@ public class StageClearUIController : MonoBehaviour
     int score;
     [SerializeField] Text forNextLevelText;
     int clearStageNum;
-    int lastStageNum = 4;
+    int lastStageNum = 14;
 
     // Start is called before the first frame update
     void Start()

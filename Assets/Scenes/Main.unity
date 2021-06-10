@@ -1176,6 +1176,7 @@ MonoBehaviour:
   - {fileID: 1165114554}
   - {fileID: 480774034}
   - {fileID: 296547523}
+  player: {fileID: 275885280}
 --- !u!4 &703655307
 Transform:
   m_ObjectHideFlags: 0
@@ -2203,7 +2204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334120054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: -0.525, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2953,6 +2954,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 275885285, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.8125
+      objectReference: {fileID: 0}
     - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
       propertyPath: bpm
       value: 60
@@ -2969,6 +2974,14 @@ PrefabInstance:
       propertyPath: endLine
       value: 
       objectReference: {fileID: 1895993654}
+    - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
+      propertyPath: scoreSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 395d7e53716a64856aa9d09f48c8a611, type: 3}
+    - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
+      propertyPath: damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d3c68baf7de2466dac41230a2facd5b, type: 3}
     - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
       propertyPath: sceneManager
       value: 

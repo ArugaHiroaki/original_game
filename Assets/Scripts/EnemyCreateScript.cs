@@ -47,7 +47,8 @@ public class EnemyCreateScript : MonoBehaviour
     public void CreateEnemy()
     {
         int enemyRange = 1;
-        if(currentStageNum >= 2) { enemyRange = 2; }
+        if(currentStageNum >= 5) { enemyRange = 2; }
+        if(currentStageNum >= 10) { enemyRange = 3; }
         int enemykind = Random.Range(0, enemyRange);
         int position = Random.Range(0, 7);
         Instantiate(enemies[enemykind], new Vector3(this.transform.position.x, createPosition_y[position], this.transform.position.z), Quaternion.identity);

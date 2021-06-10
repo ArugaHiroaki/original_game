@@ -11,6 +11,7 @@ public class MusicController : MonoBehaviour
     [SerializeField] GameObject player;
     PlayerController playerController;
     int currentStageNum;
+    int musicNum;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,8 @@ public class MusicController : MonoBehaviour
         audioSource = this.GetComponent<AudioSource>();
         playerController = player.GetComponent<PlayerController>();
         currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
-        audioSource.PlayOneShot(backGroundMusic[currentStageNum]);
+        musicNum = currentStageNum % 5;
+        audioSource.PlayOneShot(backGroundMusic[musicNum]);
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class MusicController : MonoBehaviour
         {
             if(audioSource.volume < 1)
             {
-                audioSource.volume += 0.01f;
+                audioSource.volume += 0.005f;
             }
         }
     }

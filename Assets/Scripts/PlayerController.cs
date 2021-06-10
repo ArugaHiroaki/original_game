@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     bool canShot;
     int currentPlayerPosNum;
     float[] playerPos_y = new float[7] { -1.7f, -1.3f, -0.9f, -0.55f, -0.15f, 0.2f, 0.6f };
-    private int playerLevel;
+    int playerLevel;
+    int maxNoteNum;
 
     [SerializeField] GameObject timingCircle;
     CircleController circleController;
@@ -28,11 +29,13 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip[] noteSound;
     AudioSource audioSource;
+    public AudioClip damageSound;
+    public AudioClip scoreSound;
 
     private Animator animator;
 
     int currentStageNum;
-    float[] bpm = new float[5] { 60, 70, 80, 90, 100 };
+    float[] bpm = new float[15] { 60, 70, 80, 90, 100, 60, 70, 80, 90, 100, 60, 70, 80, 90, 100 };
 
     // Start is called before the first frame update
     void Start()
@@ -45,11 +48,23 @@ public class PlayerController : MonoBehaviour
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
         isPlaying = true;
-        timer = 20;
+        timer = 10;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
         animator = this.GetComponent<Animator>();
+        if(currentStageNum >= 5)
+        {
+            maxNoteNum = 1;
+            if(currentStageNum >= 10)
+            {
+                maxNoteNum = 2;
+            }
+        } else
+        {
+            maxNoteNum = 0;
+        }
+        Debug.Log("maxNoteNum: " + maxNoteNum);
         //score = 0;
     }
 
@@ -142,11 +157,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            //音符の切り替え
+            //音符の切り替え(Cキーが押された時)
             if (Input.GetKeyDown(KeyCode.C))
             {
                 noteNum++;
-                if (noteNum >= 3)
+                if (noteNum > maxNoteNum)
                 {
                     noteNum = 0;
                 }
@@ -214,11 +229,13 @@ public class PlayerController : MonoBehaviour
 
     public void AddScore(int addScore)
     {
+        audioSource.PlayOneShot(scoreSound);
         score += addScore;
     }
 
     public void Damage()
     {
+        audioSource.PlayOneShot(damageSound);
         playerHp--;
         if (score >= 100)
         {
