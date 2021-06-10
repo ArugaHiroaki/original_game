@@ -20,17 +20,19 @@ public class MusicController : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         musicNum = currentStageNum % 5;
+        audioSource.volume = 0;
         audioSource.PlayOneShot(backGroundMusic[musicNum]);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerController.isPlaying)
+        /*if (playerController.isPlaying)
         {
             audioSource.volume = 0;
         }
-        else
+        else*/
+        if(!playerController.isPlaying && playerController.timer <= 0)
         {
             if(audioSource.volume < 1)
             {

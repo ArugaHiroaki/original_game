@@ -53,8 +53,8 @@ public class CircleController : MonoBehaviour
         var amount = m_elapedTime % m_duration / m_duration;
         var scale = Mathf.Lerp(m_from, m_to, amount);
         */
-        m_elapedTime += Time.deltaTime;
-        var amount = m_elapedTime % m_duration / m_duration;
+        /*m_elapedTime += Time.deltaTime;
+        var amount = m_elapedTime % m_duration / m_duration;*/
         //Debug.Log(amount);
         /*if (amount >= 0.99f)
         {
@@ -64,6 +64,8 @@ public class CircleController : MonoBehaviour
         */
         if (playerController.isPlaying)
         {
+            m_elapedTime += Time.deltaTime;
+            var amount = m_elapedTime % m_duration / m_duration;
             var scale = Mathf.Lerp(m_from, m_to, amount);
             transform.localScale = new Vector3(scale, scale, 1);
             timeCounter += Time.deltaTime;

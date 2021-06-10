@@ -47,11 +47,11 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
-        isPlaying = true;
         timer = 10;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
+        isPlaying = false;
         animator = this.GetComponent<Animator>();
         if(currentStageNum >= 5)
         {
@@ -71,104 +71,104 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPlaying)
+        {
+            if (timer > 0)
+            {
+                animator.SetFloat("Horizontal", 0);
+                timer -= Time.deltaTime;
+                if (this.gameObject.transform.position.x <= -5)
+                {
+                    isZone = true;
+                }
+                else
+                {
+                    isZone = false;
+                }
+
+                //右キーが押された時
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    if (this.transform.position.x <= 4)
+                    {
+                        this.transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                        animator.SetFloat("Horizontal", 1.0f);
+                        this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+                    }
+                }
+
+                //左キーが押された時
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    if (this.transform.position.x >= -6.1f)
+                    {
+                        this.transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
+                        animator.SetFloat("Horizontal", -1.0f);
+                        this.transform.localScale = new Vector3(-0.75f, 0.75f, 0.75f);
+                    }
+                }
+
+                if (isZone)
+                {
+
+                    //上キーが押された時
+                    if (Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        if (currentPlayerPosNum <= 5)
+                        {
+                            currentPlayerPosNum++;
+                            this.transform.position = new Vector2(this.transform.position.x, playerPos_y[currentPlayerPosNum]);
+                        }
+                    }
+
+                    //下キーが押された時
+                    if (Input.GetKeyDown(KeyCode.DownArrow))
+                    {
+                        if (currentPlayerPosNum >= 1)
+                        {
+                            currentPlayerPosNum--;
+                            this.transform.position = new Vector2(this.transform.position.x, playerPos_y[currentPlayerPosNum]);
+                        }
+                    }
+
+                    //音符の発射
+                    if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.95f)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+                            if (canShot)
+                            {
+                                Shot(currentPlayerPosNum);
+                                if (playerLevel >= 2 && currentPlayerPosNum <= 4)
+                                {
+                                    Shot(currentPlayerPosNum + 2);
+                                }
+                                if (playerLevel >= 3 && currentPlayerPosNum >= 2)
+                                {
+                                    Shot(currentPlayerPosNum - 2);
+                                }
+                                Invoke("Reload", 30 / bpm[currentStageNum]);
+                            }
+                        }
+                    }
+                }
+
+                //音符の切り替え(Cキーが押された時)
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    noteNum++;
+                    if (noteNum > maxNoteNum)
+                    {
+                        noteNum = 0;
+                    }
+                }
+            }
+        }
         if (timer <= 0)
         {
             timer = 0;
             isPlaying = false;
-        }
-        if (isPlaying)
-        {
-            animator.SetFloat("Horizontal", 0);
-            timer -= Time.deltaTime;
-            if (this.gameObject.transform.position.x <= -5)
-            {
-                isZone = true;
-            }
-            else
-            {
-                isZone = false;
-            }
-
-            //右キーが押された時
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                if (this.transform.position.x <= 4)
-                {
-                    this.transform.position += new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
-                    animator.SetFloat("Horizontal", 1.0f);
-                    this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                }
-            }
-
-            //左キーが押された時
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (this.transform.position.x >= -6.1f)
-                {
-                    this.transform.position -= new Vector3(1, 0, 0) * moveSpeed * Time.deltaTime;
-                    animator.SetFloat("Horizontal", -1.0f);
-                    this.transform.localScale = new Vector3(-0.75f, 0.75f, 0.75f);
-                }
-            }
-
-            if (isZone)
-            {
-
-                //上キーが押された時
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    if (currentPlayerPosNum <= 5)
-                    {
-                        currentPlayerPosNum++;
-                        this.transform.position = new Vector2(this.transform.position.x, playerPos_y[currentPlayerPosNum]);
-                    }
-                }
-
-                //下キーが押された時
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    if (currentPlayerPosNum >= 1)
-                    {
-                        currentPlayerPosNum--;
-                        this.transform.position = new Vector2(this.transform.position.x, playerPos_y[currentPlayerPosNum]);
-                    }
-                }
-
-                //音符の発射
-                if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.95f)
-                {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                        if (canShot)
-                        {
-                            Shot(currentPlayerPosNum);
-                            if (playerLevel >= 2 && currentPlayerPosNum <= 4)
-                            {
-                                Shot(currentPlayerPosNum + 2);
-                            }
-                            if (playerLevel >= 3 && currentPlayerPosNum >= 2)
-                            {
-                                Shot(currentPlayerPosNum - 2);
-                            }
-                            Invoke("Reload", 30 / bpm[currentStageNum]);
-                        }
-                    }
-                }
-            }
-
-            //音符の切り替え(Cキーが押された時)
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                noteNum++;
-                if (noteNum > maxNoteNum)
-                {
-                    noteNum = 0;
-                }
-            }
-        }
-        else
-        {
             this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             endLine.SetActive(false);
             animator.SetFloat("Horizontal", 1.0f);
@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
                 PlayerPrefs.Save();
                 GameObject[] leftObjects;
                 leftObjects = GameObject.FindGameObjectsWithTag("Eighth");
-                foreach(GameObject note in leftObjects)
+                foreach (GameObject note in leftObjects)
                 {
                     Destroy(note.gameObject);
                 }
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if(this.transform.position.x <= 10)
+            if (this.transform.position.x <= 10)
             {
                 this.transform.position += new Vector3(1.5f * moveSpeed, 0, 0) * Time.deltaTime;
             }
@@ -261,5 +261,10 @@ public class PlayerController : MonoBehaviour
     void Reload()
     {
         canShot = true;
+    }
+
+    public void PlayStart()
+    {
+        isPlaying = true;
     }
 }
