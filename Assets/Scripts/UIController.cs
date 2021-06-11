@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Text stageText;
     PlayerController playerController;
     [SerializeField] Text countDownText;
+    [SerializeField] Text playerLevelText;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class UIController : MonoBehaviour
         playerHpText.text = "HP: " + playerController.playerHp;
         timeText.text = "Time: " + playerController.timer.ToString("f1");
         slider.value = sliderValue;
+        playerLevelText.text = "PlayerLevel: " + playerController.playerLevel;
     }
 
     IEnumerator CountDown()

@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     bool canShot;
     int currentPlayerPosNum;
     float[] playerPos_y = new float[7] { -1.7f, -1.3f, -0.9f, -0.55f, -0.15f, 0.2f, 0.6f };
-    int playerLevel;
+    public int playerLevel;
     int maxNoteNum;
 
     [SerializeField] GameObject timingCircle;
@@ -47,11 +47,12 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
-        timer = 10;
+        timer = 60;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
         isPlaying = false;
+        playerLevel = 1;
         animator = this.GetComponent<Animator>();
         if(currentStageNum >= 5)
         {
@@ -64,7 +65,6 @@ public class PlayerController : MonoBehaviour
         {
             maxNoteNum = 0;
         }
-        Debug.Log("maxNoteNum: " + maxNoteNum);
         //score = 0;
     }
 
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
                     }
 
                     //音符の発射
-                    if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.95f)
+                    if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.9f)
                     {
                         if (Input.GetKeyDown(KeyCode.Space))
                         {
@@ -201,7 +201,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                //sceneManager.SendMessage("LoadClear");
                 sceneScript.LoadClear();
             }
         }
