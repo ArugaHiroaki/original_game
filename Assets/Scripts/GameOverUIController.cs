@@ -3,34 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StageClearUIController : MonoBehaviour
+public class GameOverUIController : MonoBehaviour
 {
 
-    [SerializeField] Text scoreText;
-    int score;
-    [SerializeField] Text forNextLevelText;
+    [SerializeField] Text retryText;
     [SerializeField] Text forTitleText;
-    int clearStageNum;
-    int lastStageNum = 14;
-    SceneScript sceneScript;
     [SerializeField] GameObject sceneManager;
+    SceneScript sceneScript;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        score = PlayerPrefs.GetInt("SCORE", 0);
-        scoreText.text = "Score: " + score;
-        clearStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         sceneScript = sceneManager.GetComponent<SceneScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(clearStageNum == lastStageNum)
-        {
-            forNextLevelText.text = "PRESS SPACE FOR RETRY";
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine("MoveMain");
@@ -39,26 +29,21 @@ public class StageClearUIController : MonoBehaviour
         {
             StartCoroutine("MoveTitle");
         }
-        /*int score = 0;
-        if(score < gameScore)
-        {
-            score++;
-            scoreText.text = "Score: " + score;
-        }*/
     }
 
     IEnumerator MoveTitle()
     {
+        string tmpText = forTitleText.text;
         forTitleText.text = "";
         yield return new WaitForSeconds(0.25f);
 
-        forTitleText.text = "PRESS RETURN TO TITLE";
+        forTitleText.text = tmpText;
         yield return new WaitForSeconds(0.25f);
 
         forTitleText.text = "";
         yield return new WaitForSeconds(0.25f);
 
-        forTitleText.text = "PRESS RETURN TO TITLE";
+        forTitleText.text = tmpText;
         yield return new WaitForSeconds(0.25f);
 
         sceneScript.LoadTitle();
@@ -66,17 +51,17 @@ public class StageClearUIController : MonoBehaviour
 
     IEnumerator MoveMain()
     {
-        string tmpText = forNextLevelText.text;
-        forNextLevelText.text = "";
+        string tmpText = retryText.text;
+        retryText.text = "";
         yield return new WaitForSeconds(0.25f);
 
-        forNextLevelText.text = tmpText;
+        retryText.text = tmpText;
         yield return new WaitForSeconds(0.25f);
 
-        forNextLevelText.text = "";
+        retryText.text = "";
         yield return new WaitForSeconds(0.25f);
 
-        forNextLevelText.text = tmpText;
+        retryText.text = tmpText;
         yield return new WaitForSeconds(0.25f);
 
         sceneScript.LoadMain();

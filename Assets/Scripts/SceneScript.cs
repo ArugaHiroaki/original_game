@@ -31,17 +31,17 @@ public class SceneScript : MonoBehaviour
                 SceneManager.LoadScene("GameOver");
             }
         }
-        if (currentSceneName == "GameOver")
+        /*if (currentSceneName == "GameOver")
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                LoadMain();
+                //LoadMain();
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                LoadTitle();
+                //LoadTitle();
             }
-        }
+        }*/
         if(currentSceneName == "GameClear")
         {
 
@@ -53,7 +53,7 @@ public class SceneScript : MonoBehaviour
                     PlayerPrefs.SetInt("ClearStage", clearStageNum + 1);
                     PlayerPrefs.Save();
                 }
-                LoadMain();
+                //LoadMain();
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -62,7 +62,7 @@ public class SceneScript : MonoBehaviour
                     PlayerPrefs.SetInt("ClearStage", clearStageNum + 1);
                     PlayerPrefs.Save();
                 }
-                LoadTitle();
+                //LoadTitle();
             }
         }
         if(currentSceneName == "Title")
@@ -70,11 +70,11 @@ public class SceneScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 PlayerPrefs.DeleteKey("ClearStage");
-                LoadMain();
+                //LoadMain();
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                LoadMain();
+                //LoadMain();
             }
         }
     }
@@ -84,12 +84,12 @@ public class SceneScript : MonoBehaviour
         SceneManager.LoadScene("GameClear");
     }
 
-    void LoadMain()
+    public void LoadMain()
     {
         SceneManager.LoadScene("Main");
     }
 
-    void LoadTitle()
+    public void LoadTitle()
     {
         SceneManager.LoadScene("Title");
     }
