@@ -12,6 +12,7 @@ public class MusicController : MonoBehaviour
     PlayerController playerController;
     int currentStageNum;
     int musicNum;
+    float[] maxMusicVolume = new float[5] { 0.25f, 0.5f, 0.15f, 0.35f, 0.2f };
 
     // Start is called before the first frame update
     void Start()
@@ -34,9 +35,10 @@ public class MusicController : MonoBehaviour
         else*/
         if(!playerController.isPlaying && playerController.timer <= 0)
         {
-            if(audioSource.volume < 1)
+            if(audioSource.volume < maxMusicVolume[musicNum])
             {
-                audioSource.volume += 0.005f;
+                //audioSource.volume += 0.005f;
+                audioSource.volume += maxMusicVolume[musicNum]/100;
             }
         }
     }

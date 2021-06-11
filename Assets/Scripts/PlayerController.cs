@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     int currentStageNum;
-    float[] bpm = new float[15] { 60, 70, 80, 90, 100, 60, 70, 80, 90, 100, 60, 70, 80, 90, 100 };
+    float[] bpm = new float[15] { 60, 72, 80, 90, 105, 60, 72, 80, 90, 105, 60, 72, 80, 90, 105 };
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
-        timer = 60;
+        timer = 10;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
