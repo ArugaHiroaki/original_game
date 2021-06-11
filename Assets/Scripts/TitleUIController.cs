@@ -10,12 +10,15 @@ public class TitleUIController : MonoBehaviour
     [SerializeField] Text continueText;
     [SerializeField] GameObject sceneManager;
     SceneScript sceneScript;
+    [SerializeField] AudioClip selectSound;
+    AudioSource audioSource;
 
 
     // Start is called before the first frame update
     void Start()
     {
         sceneScript = sceneManager.GetComponent<SceneScript>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class TitleUIController : MonoBehaviour
 
     IEnumerator NewGame()
     {
+        audioSource.PlayOneShot(selectSound);
         string tmpText = newGameText.text;
         newGameText.text = "";
         yield return new WaitForSeconds(0.25f);
@@ -51,6 +55,7 @@ public class TitleUIController : MonoBehaviour
 
     IEnumerator Continue()
     {
+        audioSource.PlayOneShot(selectSound);
         string tmpText = continueText.text;
         continueText.text = "";
         yield return new WaitForSeconds(0.25f);
@@ -62,7 +67,7 @@ public class TitleUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         continueText.text = tmpText;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
 
         sceneScript.LoadMain();
     }

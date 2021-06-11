@@ -10,12 +10,15 @@ public class GameOverUIController : MonoBehaviour
     [SerializeField] Text forTitleText;
     [SerializeField] GameObject sceneManager;
     SceneScript sceneScript;
+    [SerializeField] AudioClip selectSound;
+    AudioSource audioSource;
 
 
     // Start is called before the first frame update
     void Start()
     {
         sceneScript = sceneManager.GetComponent<SceneScript>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class GameOverUIController : MonoBehaviour
 
     IEnumerator MoveTitle()
     {
+        audioSource.PlayOneShot(selectSound);
         string tmpText = forTitleText.text;
         forTitleText.text = "";
         yield return new WaitForSeconds(0.25f);
@@ -51,6 +55,7 @@ public class GameOverUIController : MonoBehaviour
 
     IEnumerator MoveMain()
     {
+        audioSource.PlayOneShot(selectSound);
         string tmpText = retryText.text;
         retryText.text = "";
         yield return new WaitForSeconds(0.25f);
@@ -62,7 +67,7 @@ public class GameOverUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         retryText.text = tmpText;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
 
         sceneScript.LoadMain();
     }

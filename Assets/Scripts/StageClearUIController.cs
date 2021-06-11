@@ -14,6 +14,8 @@ public class StageClearUIController : MonoBehaviour
     int lastStageNum = 14;
     SceneScript sceneScript;
     [SerializeField] GameObject sceneManager;
+    [SerializeField] AudioClip selectSound;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class StageClearUIController : MonoBehaviour
         scoreText.text = "Score: " + score;
         clearStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         sceneScript = sceneManager.GetComponent<SceneScript>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +52,7 @@ public class StageClearUIController : MonoBehaviour
 
     IEnumerator MoveTitle()
     {
+        audioSource.PlayOneShot(selectSound);
         forTitleText.text = "";
         yield return new WaitForSeconds(0.25f);
 
@@ -66,6 +70,7 @@ public class StageClearUIController : MonoBehaviour
 
     IEnumerator MoveMain()
     {
+        audioSource.PlayOneShot(selectSound);
         string tmpText = forNextLevelText.text;
         forNextLevelText.text = "";
         yield return new WaitForSeconds(0.25f);
@@ -77,7 +82,7 @@ public class StageClearUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         forNextLevelText.text = tmpText;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
 
         sceneScript.LoadMain();
     }
