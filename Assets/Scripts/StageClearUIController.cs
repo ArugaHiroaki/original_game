@@ -10,12 +10,15 @@ public class StageClearUIController : MonoBehaviour
     int score;
     [SerializeField] Text forNextLevelText;
     [SerializeField] Text forTitleText;
+    [SerializeField] Text clearText;
     int clearStageNum;
     int lastStageNum = 14;
     SceneScript sceneScript;
     [SerializeField] GameObject sceneManager;
     [SerializeField] AudioClip selectSound;
     AudioSource audioSource;
+    [SerializeField] AudioClip stageClearSound;
+    [SerializeField] AudioClip allClearSound;
 
     // Start is called before the first frame update
     void Start()
@@ -25,15 +28,21 @@ public class StageClearUIController : MonoBehaviour
         clearStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = GetComponent<AudioSource>();
+        if (clearStageNum == lastStageNum)
+        {
+            clearText.text = "AllClear!!";
+            forNextLevelText.text = "PRESS SPACE FOR RETRY";
+            audioSource.PlayOneShot(allClearSound);
+        }
+        else
+        {
+            audioSource.PlayOneShot(stageClearSound);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(clearStageNum == lastStageNum)
-        {
-            forNextLevelText.text = "PRESS SPACE FOR RETRY";
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine("MoveMain");

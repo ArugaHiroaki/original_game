@@ -305,8 +305,11 @@ MonoBehaviour:
   scoreText: {fileID: 1823965601}
   forNextLevelText: {fileID: 1935081833}
   forTitleText: {fileID: 1758156798}
+  clearText: {fileID: 1975850411}
   sceneManager: {fileID: 1306386425}
   selectSound: {fileID: 8300000, guid: 5b5a48c0e1c34445fa92467a08006778, type: 3}
+  stageClearSound: {fileID: 8300000, guid: a57239b097fac4d969f00ddca332b37c, type: 3}
+  allClearSound: {fileID: 8300000, guid: 4a9bf017c57ee4d00840e5e86b075532, type: 3}
 --- !u!4 &861149330
 Transform:
   m_ObjectHideFlags: 0
@@ -433,7 +436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &867394297
 AudioSource:
   m_ObjectHideFlags: 0
@@ -444,7 +447,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4a9bf017c57ee4d00840e5e86b075532, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a57239b097fac4d969f00ddca332b37c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
@@ -895,7 +898,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: StageClear
+  m_Text: StageClear!!
 --- !u!222 &1975850412
 CanvasRenderer:
   m_ObjectHideFlags: 0

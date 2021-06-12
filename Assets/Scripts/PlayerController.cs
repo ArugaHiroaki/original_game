@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
-        timer = 10;
+        timer = 5;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;

@@ -15,11 +15,14 @@ public class UIController : MonoBehaviour
     PlayerController playerController;
     [SerializeField] Text countDownText;
     [SerializeField] Text playerLevelText;
+    [SerializeField] AudioClip countDownSound;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         playerController = player.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
         slider.value = 1;
         stageText.text = "Stage" + (PlayerPrefs.GetInt("ClearStage", 0) + 1);
         countDownText.text = "";
@@ -40,12 +43,15 @@ public class UIController : MonoBehaviour
     IEnumerator CountDown()
     {
         countDownText.text = "3";
+        audioSource.PlayOneShot(countDownSound);
         yield return new WaitForSeconds(1.0f);
 
         countDownText.text = "2";
+        audioSource.PlayOneShot(countDownSound);
         yield return new WaitForSeconds(1.0f);
 
         countDownText.text = "1";
+        audioSource.PlayOneShot(countDownSound);
         yield return new WaitForSeconds(1.0f);
 
         countDownText.text = "START";
