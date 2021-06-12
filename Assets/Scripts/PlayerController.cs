@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     int currentStageNum;
     float[] bpm = new float[15] { 60, 72, 80, 90, 105, 60, 72, 80, 90, 105, 60, 72, 80, 90, 105 };
 
+    float shotTimingValue_Low;
+    float shotTimingValue_High;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
         sceneScript = sceneManager.GetComponent<SceneScript>();
         audioSource = this.gameObject.GetComponent<AudioSource>();
         noteNum = 0;
-        timer = 5;
+        timer = 60;
         canShot = true;
         playerLevel = 1;
         currentPlayerPosNum = 3;
@@ -54,6 +57,7 @@ public class PlayerController : MonoBehaviour
         isZone = true;
         playerLevel = 1;
         animator = this.GetComponent<Animator>();
+
         if(currentStageNum >= 5)
         {
             maxNoteNum = 1;
@@ -64,6 +68,17 @@ public class PlayerController : MonoBehaviour
         } else
         {
             maxNoteNum = 0;
+        }
+
+        if(currentStageNum % 5 <= 2)
+        {
+            shotTimingValue_Low = 0.05f;
+            shotTimingValue_High = 0.9f;
+        }
+        else
+        {
+            shotTimingValue_Low = 0.075f;
+            shotTimingValue_High = 0.75f;
         }
     }
 
@@ -131,7 +146,7 @@ public class PlayerController : MonoBehaviour
                     }
 
                     //音符の発射
-                    if (circleController.timeCounter <= 0.05f || circleController.timeCounter >= 0.9f)
+                    if (circleController.timeCounter <= shotTimingValue_Low || circleController.timeCounter >= shotTimingValue_High)
                     {
                         if (Input.GetKeyDown(KeyCode.Space))
                         {
@@ -171,6 +186,7 @@ public class PlayerController : MonoBehaviour
             this.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             endLine.SetActive(false);
             animator.SetFloat("Horizontal", 1.0f);
+
             if (this.transform.position.x < 4.5f)
             {
                 PlayerPrefs.SetInt("SCORE", score);
@@ -212,8 +228,16 @@ public class PlayerController : MonoBehaviour
             if(collision.gameObject.transform.position.x > -0.5f)
             {
                 AddScore(200);
-                playerLevel++;
-            } else
+                if(playerLevel < 3)
+                {
+                    playerLevel++;
+                }
+                else
+                {
+                    AddScore(200);
+                }
+            }
+            else
             {
                 AddScore(100);
             }
