@@ -48,7 +48,7 @@ public class TitleUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         newGameText.text = tmpText;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.15f);
 
         sceneScript.LoadMain();
     }
@@ -67,7 +67,7 @@ public class TitleUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         continueText.text = tmpText;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
 
         sceneScript.LoadMain();
     }

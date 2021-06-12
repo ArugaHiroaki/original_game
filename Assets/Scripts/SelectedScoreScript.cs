@@ -9,13 +9,18 @@ public class SelectedScoreScript : MonoBehaviour
     int scoreNum;
     int currentStageNum;
     int maxNoteNum;
+    [SerializeField] GameObject player;
+    PlayerController playerController;
+    [SerializeField] GameObject cross;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerController = player.GetComponent<PlayerController>();
         scoreNum = 0;
         selectedScores[0].SetActive(true);
         currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
+        cross.SetActive(false);
         if (currentStageNum >= 5)
         {
             maxNoteNum = 1;
@@ -33,15 +38,26 @@ public class SelectedScoreScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (playerController.isPlaying)
         {
-            selectedScores[scoreNum].SetActive(false);
-            scoreNum++;
-            if(scoreNum > maxNoteNum)
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                scoreNum = 0;
+                selectedScores[scoreNum].SetActive(false);
+                scoreNum++;
+                if (scoreNum > maxNoteNum)
+                {
+                    scoreNum = 0;
+                }
+                selectedScores[scoreNum].SetActive(true);
             }
-            selectedScores[scoreNum].SetActive(true);
+        }
+        if (playerController.isZone)
+        {
+            cross.SetActive(false);
+        }
+        else
+        {
+            cross.SetActive(true);
         }
     }
 }

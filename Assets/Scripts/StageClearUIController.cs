@@ -32,6 +32,7 @@ public class StageClearUIController : MonoBehaviour
         {
             clearText.text = "AllClear!!";
             forNextLevelText.text = "PRESS SPACE FOR RETRY";
+            audioSource.volume = 0.25f;
             audioSource.PlayOneShot(allClearSound);
         }
         else
@@ -45,10 +46,14 @@ public class StageClearUIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            audioSource.Stop();
+            audioSource.volume = 1;
             StartCoroutine("MoveMain");
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            audioSource.Stop();
+            audioSource.volume = 1;
             StartCoroutine("MoveTitle");
         }
         /*int score = 0;
@@ -72,7 +77,7 @@ public class StageClearUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         forTitleText.text = "PRESS RETURN TO TITLE";
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.15f);
 
         sceneScript.LoadTitle();
     }
@@ -91,7 +96,7 @@ public class StageClearUIController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         forNextLevelText.text = tmpText;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
 
         sceneScript.LoadMain();
     }

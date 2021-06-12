@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public int playerHp = 10;　//現在のHP
     public int maxPlayerHp = 10;　//最大HP
     int noteNum;　//音符の種類の番号
-    bool isZone;　//射撃ゾーンにいるかどうか
+    public bool isZone;　//射撃ゾーンにいるかどうか
     public bool isPlaying; //プレイ中かどうか
     public float timer;
     bool canShot;
@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         PlayerPrefs.DeleteKey("SCORE");
-        //PlayerPrefs.DeleteKey("ClearStage");
         currentStageNum = PlayerPrefs.GetInt("ClearStage", 0);
         circleController = timingCircle.GetComponent<CircleController>();
         sceneScript = sceneManager.GetComponent<SceneScript>();
@@ -52,6 +51,7 @@ public class PlayerController : MonoBehaviour
         playerLevel = 1;
         currentPlayerPosNum = 3;
         isPlaying = false;
+        isZone = true;
         playerLevel = 1;
         animator = this.GetComponent<Animator>();
         if(currentStageNum >= 5)
@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
         {
             maxNoteNum = 0;
         }
-        //score = 0;
     }
 
     // Update is called once per frame
