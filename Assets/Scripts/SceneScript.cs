@@ -45,7 +45,7 @@ public class SceneScript : MonoBehaviour
         if(currentSceneName == "GameClear")
         {
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 if (clearStageNum < lastStageNum)
                 {

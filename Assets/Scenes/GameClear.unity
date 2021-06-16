@@ -983,7 +983,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: PRESS SPACE FOR NEXT STAGE
+  m_Text: PRESS SHIFT FOR NEXT STAGE
 --- !u!222 &1935081834
 CanvasRenderer:
   m_ObjectHideFlags: 0
