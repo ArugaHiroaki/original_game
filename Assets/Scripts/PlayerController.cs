@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     public AudioClip damageSound;
     public AudioClip scoreSound;
+    public AudioClip noteChangeSound;
 
     private Animator animator;
 
@@ -171,10 +172,15 @@ public class PlayerController : MonoBehaviour
                 //音符の切り替え(Cキーが押された時)
                 if (Input.GetKeyDown(KeyCode.C))
                 {
+                    int currentNoteNum = noteNum;
                     noteNum++;
                     if (noteNum > maxNoteNum)
                     {
                         noteNum = 0;
+                    }
+                    if(currentNoteNum != noteNum)
+                    {
+                        audioSource.PlayOneShot(noteChangeSound);
                     }
                 }
             }

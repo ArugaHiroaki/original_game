@@ -3335,6 +3335,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 981419031}
     - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
+      propertyPath: noteChangeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 64d55640a639146099b61bee026bc0e2, type: 3}
+    - target: {fileID: 6984365852677814396, guid: 8e3ebb90861e246079cec4282c10c4de, type: 3}
       propertyPath: notes.Array.size
       value: 3
       objectReference: {fileID: 0}
