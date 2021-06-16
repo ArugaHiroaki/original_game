@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    float moveSpeed = 2f;　//左右の動きの速さ
+    float moveSpeed = 2.5f;　//左右の動きの速さ
     [SerializeField] GameObject[] notes;　//音符格納配列
     public int score;　//スコア
     public int playerHp = 10;　//現在のHP
@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     int currentStageNum;
     float[] bpm = new float[15] { 60, 72, 80, 90, 105, 60, 72, 80, 90, 105, 60, 72, 80, 90, 105 };
 
+    float[] shotTimingValues_Low = new float[5] { 0.05f, 0.05f, 0.075f, 0.075f, 0.075f };
+    float[] shotTimingValues_High = new float[5] { 0.85f, 0.75f, 0.7f, 0.6f, 0.5f };
     float shotTimingValue_Low;
     float shotTimingValue_High;
 
@@ -66,21 +68,24 @@ public class PlayerController : MonoBehaviour
             {
                 maxNoteNum = 2;
             }
-        } else
+        }
+        else
         {
             maxNoteNum = 0;
         }
 
-        if(currentStageNum % 5 <= 2)
+        shotTimingValue_Low = shotTimingValues_Low[currentStageNum % 5];
+        shotTimingValue_High = shotTimingValues_High[currentStageNum % 5];
+        /*if(currentStageNum % 5 <= 2)
         {
             shotTimingValue_Low = 0.05f;
-            shotTimingValue_High = 0.9f;
+            shotTimingValue_High = 0.85f;
         }
         else
         {
             shotTimingValue_Low = 0.075f;
-            shotTimingValue_High = 0.75f;
-        }
+            shotTimingValue_High = 0.5f;
+        }*/
     }
 
     // Update is called once per frame
@@ -218,7 +223,7 @@ public class PlayerController : MonoBehaviour
 
             if (this.transform.position.x <= 10)
             {
-                this.transform.position += new Vector3(1.5f * moveSpeed, 0, 0) * Time.deltaTime;
+                this.transform.position += new Vector3(1.0f * moveSpeed, 0, 0) * Time.deltaTime;
             }
             else
             {
@@ -281,6 +286,7 @@ public class PlayerController : MonoBehaviour
 
     void Shot(int posNum)
     {
+        Debug.Log(circleController.timeCounter);
         Instantiate(notes[noteNum], new Vector2(this.transform.position.x + 1, playerPos_y[posNum]), Quaternion.identity);
         audioSource.PlayOneShot(noteSound[posNum]);
         canShot = false;

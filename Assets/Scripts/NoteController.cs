@@ -5,7 +5,7 @@ using UnityEngine;
 public class NoteController : MonoBehaviour
 {
 
-    float moveSpeed = 1.5f;
+    float moveSpeed = 1.75f;
     GameObject player;
 
     // Start is called before the first frame update
