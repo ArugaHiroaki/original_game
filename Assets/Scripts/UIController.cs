@@ -37,7 +37,14 @@ public class UIController : MonoBehaviour
         playerHpText.text = "HP: " + playerController.playerHp;
         timeText.text = "Time: " + playerController.timer.ToString("f1");
         slider.value = sliderValue;
-        playerLevelText.text = "PlayerLevel: " + playerController.playerLevel;
+        if(playerController.playerLevel == 3)
+        {
+            playerLevelText.text = "PlayerLevel: MAX";
+        }
+        else
+        {
+            playerLevelText.text = "PlayerLevel: " + playerController.playerLevel;
+        }
     }
 
     IEnumerator CountDown()

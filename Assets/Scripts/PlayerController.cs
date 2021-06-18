@@ -286,7 +286,6 @@ public class PlayerController : MonoBehaviour
 
     void Shot(int posNum)
     {
-        Debug.Log(circleController.timeCounter);
         Instantiate(notes[noteNum], new Vector2(this.transform.position.x + 1, playerPos_y[posNum]), Quaternion.identity);
         audioSource.PlayOneShot(noteSound[posNum]);
         canShot = false;
